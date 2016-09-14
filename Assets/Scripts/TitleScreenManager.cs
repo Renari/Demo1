@@ -2,12 +2,14 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class TitleScreenManager : MonoBehaviour {
 
     private GameObject StartButton;
     private GameObject ScoreButton;
     private GameObject QuitButton;
+    private EventSystem TitleEventSystem;
 
     private RectTransform TitleTextTransform;
     private RectTransform StartButtonTransform;
@@ -28,37 +30,15 @@ public class TitleScreenManager : MonoBehaviour {
         StartButtonTransform = StartButton.GetComponent<RectTransform>();
         ScoreButtonTransform = ScoreButton.GetComponent<RectTransform>();
         QuitButtonTransform = QuitButton.GetComponent<RectTransform>();
+
+        TitleEventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (selected == 3)
-            {
-                selected = 1;
-                StartButton.GetComponent<Button>().Select();
-            }
-            else
-            {
-                selected++;
-            }
-            SelectionMode();
-        }
-        else if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            if (selected == 1)
-            {
-                selected = 3;
-                QuitButton.GetComponent<Button>().Select();
-            }
-            else
-            {
-                selected--;
-            }
-            SelectionMode();
-        }
+        CheckKeyInputs();
+
         float HalfCameraWidth = (Camera.main.pixelWidth / 2);
 
         // Position the title text
@@ -86,13 +66,54 @@ public class TitleScreenManager : MonoBehaviour {
         StartButtonTransform.position = new Vector3(StartXLocation, StartYLocation, 0);
     }
 
-    private void SelectionMode()
+    // Checks user inputs and reacts based on their function.
+    private void CheckKeyInputs()
+    {
+        // Allows for the user to use the arrow keys to select menu functions.
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (selected == 3)
+            {
+                selected = 1;
+                StartButton.GetComponent<Button>().Select();
+            }
+            else if (!SelectionMode())
+            {
+                selected++;
+            }
+            SelectionMode();
+        }
+        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            if (selected == 1)
+            {
+                selected = 3;
+                QuitButton.GetComponent<Button>().Select();
+            }
+            else if (!SelectionMode())
+            {
+                selected--;
+            }
+            SelectionMode();
+        }
+    }
+
+    // Resets selection to it's starting state.
+    public void ResetSelectionMode()
+    {
+        selected = 0;
+        TitleEventSystem.SetSelectedGameObject(null);
+    }
+
+    private bool SelectionMode()
     {
         if (selected == 0)
         {
             StartButton.GetComponent<Button>().Select();
             selected = 1;
+            return true;
         }
+        return false;
     }
 
     public void StartGame()
