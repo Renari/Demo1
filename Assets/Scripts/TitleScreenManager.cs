@@ -39,28 +39,28 @@ public class TitleScreenManager : MonoBehaviour {
     {
         CheckKeyInputs();
 
-        float HalfCameraWidth = (Camera.main.pixelWidth / 2);
+        float HalfCameraWidth = Screen.width / 2;
 
         // Position the title text
         float TitleXLocation = Camera.main.rect.x + HalfCameraWidth;
-        float TitleYLocation = Camera.main.pixelHeight * .75f + Camera.main.pixelRect.y;
+        float TitleYLocation = Camera.main.rect.y + Screen.height * .75f;
 
         TitleTextTransform.position = new Vector3(TitleXLocation, TitleYLocation, 0);
 
         // Position the quit button
-        float QuitXLocation = Camera.main.rect.x + Camera.main.pixelWidth - QuitButtonTransform.rect.width / 2;
+        float QuitXLocation = Camera.main.rect.x + Screen.width - QuitButtonTransform.rect.width / 2;
         float QuitYLocation = Camera.main.rect.y + QuitButtonTransform.rect.height / 2;
 
         QuitButtonTransform.position = new Vector3(QuitXLocation, QuitYLocation, 0);
 
         // Position the start button
-        float ScoreXLocation = Camera.main.rect.x + Camera.main.pixelWidth - StartButtonTransform.rect.width / 2;
+        float ScoreXLocation = Camera.main.rect.x + Screen.width - StartButtonTransform.rect.width / 2;
         float ScoreYLocation = Camera.main.rect.y + QuitButtonTransform.position.y + ScoreButtonTransform.rect.height;
 
         ScoreButtonTransform.position = new Vector3(ScoreXLocation, ScoreYLocation);
 
         // Position the start button
-        float StartXLocation = Camera.main.rect.x + Camera.main.pixelWidth - StartButtonTransform.rect.width / 2;
+        float StartXLocation = Camera.main.rect.x + Screen.width - StartButtonTransform.rect.width / 2;
         float StartYLocation = Camera.main.rect.y + ScoreButtonTransform.position.y + StartButtonTransform.rect.height;
 
         StartButtonTransform.position = new Vector3(StartXLocation, StartYLocation, 0);
