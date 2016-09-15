@@ -6,7 +6,7 @@ public class BackgroundScroller : MonoBehaviour {
     private GameObject background;
     private Transform backgroundTransform;
     private Vector2 savedOffset;
-    private Renderer renderer;
+    private new Renderer renderer;
 
     public float scrollSpeed;
 
@@ -21,10 +21,9 @@ public class BackgroundScroller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Scale the background to fit the camera
-        float BackgroundHeight = Camera.main.orthographicSize * 3.6f;
-        float BackgroundWidth = BackgroundHeight * Screen.width / Screen.height;
-
-        backgroundTransform.localScale = new Vector3(BackgroundHeight, BackgroundWidth, 1);
+        float width = Camera.main.orthographicSize * 2.0f * Screen.width / Screen.height;
+        float height = width * 2.25f;
+        backgroundTransform.localScale = new Vector3(width, height, 0.1f);
 
         // Scroll the background
         float y = Mathf.Repeat(Time.time * scrollSpeed, 1);
