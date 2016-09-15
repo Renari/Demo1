@@ -6,32 +6,32 @@ using UnityEngine.EventSystems;
 
 public class TitleScreenManager : MonoBehaviour {
 
-    private GameObject StartButton;
-    private GameObject ScoreButton;
-    private GameObject QuitButton;
-    private EventSystem TitleEventSystem;
+    private GameObject startButton;
+    private GameObject scoreButton;
+    private GameObject quitButton;
+    private EventSystem titleEventSystem;
 
-    private RectTransform TitleTextTransform;
-    private RectTransform StartButtonTransform;
-    private RectTransform ScoreButtonTransform;
-    private RectTransform QuitButtonTransform;
+    private RectTransform titleTextTransform;
+    private RectTransform startButtonTransform;
+    private RectTransform scoreButtonTransform;
+    private RectTransform quitButtonTransform;
 
     private int selected;
 
     // Use this for initialization
     void Start ()
     {
-        TitleTextTransform = GameObject.FindGameObjectWithTag("TitleText").GetComponent<RectTransform>();
+        titleTextTransform = GameObject.FindGameObjectWithTag("TitleText").GetComponent<RectTransform>();
 
-        StartButton = GameObject.FindGameObjectWithTag("StartButton");
-        ScoreButton = GameObject.FindGameObjectWithTag("ScoreButton");
-        QuitButton = GameObject.FindGameObjectWithTag("QuitButton");
+        startButton = GameObject.FindGameObjectWithTag("StartButton");
+        scoreButton = GameObject.FindGameObjectWithTag("ScoreButton");
+        quitButton = GameObject.FindGameObjectWithTag("QuitButton");
 
-        StartButtonTransform = StartButton.GetComponent<RectTransform>();
-        ScoreButtonTransform = ScoreButton.GetComponent<RectTransform>();
-        QuitButtonTransform = QuitButton.GetComponent<RectTransform>();
+        startButtonTransform = startButton.GetComponent<RectTransform>();
+        scoreButtonTransform = scoreButton.GetComponent<RectTransform>();
+        quitButtonTransform = quitButton.GetComponent<RectTransform>();
 
-        TitleEventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
+        titleEventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
     }
 	
 	// Update is called once per frame
@@ -45,25 +45,25 @@ public class TitleScreenManager : MonoBehaviour {
         float TitleXLocation = Camera.main.rect.x + HalfCameraWidth;
         float TitleYLocation = Camera.main.rect.y + Screen.height * .75f;
 
-        TitleTextTransform.position = new Vector3(TitleXLocation, TitleYLocation, 0);
+        titleTextTransform.position = new Vector3(TitleXLocation, TitleYLocation, 0);
 
         // Position the quit button
-        float QuitXLocation = Camera.main.rect.x + Screen.width - QuitButtonTransform.rect.width / 2;
-        float QuitYLocation = Camera.main.rect.y + QuitButtonTransform.rect.height / 2;
+        float QuitXLocation = Camera.main.rect.x + Screen.width - quitButtonTransform.rect.width / 2;
+        float QuitYLocation = Camera.main.rect.y + quitButtonTransform.rect.height / 2;
 
-        QuitButtonTransform.position = new Vector3(QuitXLocation, QuitYLocation, 0);
-
-        // Position the start button
-        float ScoreXLocation = Camera.main.rect.x + Screen.width - StartButtonTransform.rect.width / 2;
-        float ScoreYLocation = Camera.main.rect.y + QuitButtonTransform.position.y + ScoreButtonTransform.rect.height;
-
-        ScoreButtonTransform.position = new Vector3(ScoreXLocation, ScoreYLocation);
+        quitButtonTransform.position = new Vector3(QuitXLocation, QuitYLocation, 0);
 
         // Position the start button
-        float StartXLocation = Camera.main.rect.x + Screen.width - StartButtonTransform.rect.width / 2;
-        float StartYLocation = Camera.main.rect.y + ScoreButtonTransform.position.y + StartButtonTransform.rect.height;
+        float ScoreXLocation = Camera.main.rect.x + Screen.width - startButtonTransform.rect.width / 2;
+        float ScoreYLocation = Camera.main.rect.y + quitButtonTransform.position.y + scoreButtonTransform.rect.height;
 
-        StartButtonTransform.position = new Vector3(StartXLocation, StartYLocation, 0);
+        scoreButtonTransform.position = new Vector3(ScoreXLocation, ScoreYLocation);
+
+        // Position the start button
+        float StartXLocation = Camera.main.rect.x + Screen.width - startButtonTransform.rect.width / 2;
+        float StartYLocation = Camera.main.rect.y + scoreButtonTransform.position.y + startButtonTransform.rect.height;
+
+        startButtonTransform.position = new Vector3(StartXLocation, StartYLocation, 0);
     }
 
     // Checks user inputs and reacts based on their function.
@@ -75,7 +75,7 @@ public class TitleScreenManager : MonoBehaviour {
             if (selected == 3)
             {
                 selected = 1;
-                StartButton.GetComponent<Button>().Select();
+                startButton.GetComponent<Button>().Select();
             }
             else if (!SelectionMode())
             {
@@ -88,7 +88,7 @@ public class TitleScreenManager : MonoBehaviour {
             if (selected == 1)
             {
                 selected = 3;
-                QuitButton.GetComponent<Button>().Select();
+                quitButton.GetComponent<Button>().Select();
             }
             else if (!SelectionMode())
             {
@@ -102,14 +102,14 @@ public class TitleScreenManager : MonoBehaviour {
     public void ResetSelectionMode()
     {
         selected = 0;
-        TitleEventSystem.SetSelectedGameObject(null);
+        titleEventSystem.SetSelectedGameObject(null);
     }
 
     private bool SelectionMode()
     {
         if (selected == 0)
         {
-            StartButton.GetComponent<Button>().Select();
+            startButton.GetComponent<Button>().Select();
             selected = 1;
             return true;
         }
