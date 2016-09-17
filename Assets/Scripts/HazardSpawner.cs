@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 public class HazardSpawner : MonoBehaviour {
 
@@ -11,12 +10,12 @@ public class HazardSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        hazard = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Hazard.prefab");
+        hazard = Resources.Load("Prefabs/Hazard") as GameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        spawnRate = (float)(initialSpawn / Mathf.Sqrt(Time.time));
+        spawnRate = initialSpawn / Mathf.Sqrt(Time.time);
         if (Time.time > lastSpawn + spawnRate)
         {
             lastSpawn = Time.time;
