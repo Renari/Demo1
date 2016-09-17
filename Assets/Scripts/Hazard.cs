@@ -5,7 +5,7 @@ public class Hazard : MonoBehaviour {
 
     public float fuseTime;
     private float detonationTime;
-    private const float TIME_ALIVE = 3.0f;
+    private const float TIME_ALIVE = 2f;
     private bool detonated = false;
     private ParticleSystem particle;
 
