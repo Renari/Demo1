@@ -34,7 +34,7 @@ public class Hazard : MonoBehaviour {
         {
             Destroy(GameObject.FindGameObjectWithTag("HazardController"));
             Destroy(GameObject.FindGameObjectWithTag("Plane"));
-            ScoreController scoreController = (ScoreController) GameObject.FindGameObjectWithTag("ScoreController").GetComponent(typeof(ScoreController));
+            ScoreController scoreController = GameObject.FindGameObjectWithTag("ScoreController").GetComponent<ScoreController>();
             scoreController.SaveScore();
             if (scoreController.CheckHighScore())
             {

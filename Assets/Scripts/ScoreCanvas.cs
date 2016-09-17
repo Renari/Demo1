@@ -17,13 +17,15 @@ public class ScoreCanvas : MonoBehaviour {
     {
         foreach (ScoreController.NameKey item in Enum.GetValues(typeof(ScoreController.NameKey)))
         {
-            Text text = (Text)GameObject.FindGameObjectWithTag(Enum.GetName(typeof(ScoreController.NameKey), item)).GetComponent(typeof(Text));
-            text.text = PlayerPrefs.GetString(Enum.GetName(typeof(ScoreController.NameKey), item));
+            String key = Enum.GetName(typeof(ScoreController.NameKey), item);
+            Text text = GameObject.FindGameObjectWithTag(key).GetComponent<Text>();
+            text.text = PlayerPrefs.GetString(key);
         }
         foreach (ScoreController.ScoreKey item in Enum.GetValues(typeof(ScoreController.ScoreKey)))
         {
-            Text text = (Text)GameObject.FindGameObjectWithTag(Enum.GetName(typeof(ScoreController.ScoreKey), item)).GetComponent(typeof(Text));
-            int score = PlayerPrefs.GetInt(Enum.GetName(typeof(ScoreController.ScoreKey), item));
+            String key = Enum.GetName(typeof(ScoreController.ScoreKey), item);
+            Text text = GameObject.FindGameObjectWithTag(key).GetComponent<Text>();
+            int score = PlayerPrefs.GetInt(key);
             if (score != 0)
             {
                 text.text = score.ToString();
