@@ -112,5 +112,8 @@ public class ScoreController : MonoBehaviour {
     public void ResetScores()
     {
         PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        ScoreCanvas scoreCanvas = (ScoreCanvas)GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent(typeof(ScoreCanvas));
+        scoreCanvas.DrawScores();
     }
 }

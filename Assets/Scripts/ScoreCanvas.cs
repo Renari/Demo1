@@ -10,6 +10,16 @@ public class ScoreCanvas : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        DrawScores();
+    }
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+    public void DrawScores()
+    {
         foreach (ScoreController.NameKey item in Enum.GetValues(typeof(ScoreController.NameKey)))
         {
             Text text = (Text)GameObject.FindGameObjectWithTag(Enum.GetName(typeof(ScoreController.NameKey), item)).GetComponent(typeof(Text));
@@ -23,11 +33,10 @@ public class ScoreCanvas : MonoBehaviour {
             {
                 text.text = score.ToString();
             }
+            else
+            {
+                text.text = "";
+            }
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
