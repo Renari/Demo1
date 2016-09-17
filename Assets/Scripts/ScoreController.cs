@@ -33,7 +33,7 @@ public class ScoreController : MonoBehaviour {
     }
 
     private float startTime;
-    private int score;
+    private int score = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -52,7 +52,11 @@ public class ScoreController : MonoBehaviour {
 
     public int GetCurrentScore()
     {
-        return (int)(Time.time - startTime);
+        if (score == 0)
+        {
+            return (int)(Time.time - startTime);
+        }
+        return score;
     }
 
     public void SubmitScore(String name)
