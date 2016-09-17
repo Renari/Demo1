@@ -5,20 +5,15 @@ using UnityEngine.UI;
 
 public class ScoreCanvas : MonoBehaviour {
 
-    public ScoreController scoreController;
+    public static ScoreController scoreController;
 
 	// Use this for initialization
 	void Start ()
     {
         DrawScores();
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    public void DrawScores()
+    public static void DrawScores()
     {
         foreach (ScoreController.NameKey item in Enum.GetValues(typeof(ScoreController.NameKey)))
         {

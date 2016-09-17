@@ -113,7 +113,6 @@ public class ScoreController : MonoBehaviour {
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-        ScoreCanvas scoreCanvas = (ScoreCanvas)GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent(typeof(ScoreCanvas));
-        scoreCanvas.DrawScores();
+        ScoreCanvas.DrawScores();
     }
 }
